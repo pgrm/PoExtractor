@@ -14,11 +14,7 @@ namespace PoExtractor.Razor
 
             var results = new List<RazorPageGeneratorResult>();
 
-            // MVC uses the Views folder as convention.
-            // Razor Pages uses the Pages folder as convention.
-            // Both use Areas as convention and either have Pages or Views as subfolders.
-            var viewDirectories = Directory.EnumerateDirectories(projectDirectory, "Views", SearchOption.AllDirectories)
-                .Concat(Directory.EnumerateDirectories(projectDirectory, "Pages", SearchOption.AllDirectories))
+            var viewDirectories = Directory.EnumerateDirectories(projectDirectory, "*", SearchOption.AllDirectories)
                 .Distinct()
                 .OrderBy(dirName => dirName);
             foreach (var viewDir in viewDirectories)
