@@ -14,15 +14,15 @@ namespace PoExtractor.Razor
 
             var results = new List<RazorPageGeneratorResult>();
 
-            var viewDirectories = Directory.EnumerateDirectories(projectDirectory, "*", SearchOption.AllDirectories)
+            var allDirectories = Directory.EnumerateDirectories(projectDirectory, "*.*", SearchOption.AllDirectories)
                 .Distinct()
                 .OrderBy(dirName => dirName);
-            foreach (var viewDir in viewDirectories)
+            foreach (var dir in allDirectories)
             {
-                var viewDirPath = viewDir.Substring(projectDirectory.Length).Replace('\\', '/');
-                var viewFiles = projectEngine.FileSystem.EnumerateItems(viewDirPath).OrderBy(rzrProjItem => rzrProjItem.FileName);
+                var dirPath = dir.Substring(projectDirectory.Length).Replace('\\', '/');
+                var razorFiles = projectEngine.FileSystem.EnumerateItems(dirPath).OrderBy(rzrProjItem => rzrProjItem.FileName);
 
-                foreach (var item in viewFiles.Where(o => o.Extension == ".cshtml" || o.Extension == ".razor"))
+                foreach (var item in razorFiles.Where(o => o.Extension == ".cshtml" || o.Extension == ".razor"))
                 {
                     results.Add(GenerateCodeFile(projectEngine, item));
                 }
