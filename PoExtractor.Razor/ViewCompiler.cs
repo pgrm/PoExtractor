@@ -15,7 +15,7 @@ namespace PoExtractor.Razor
             var results = new List<RazorPageGeneratorResult>();
 
             var allDirectories = Directory.EnumerateDirectories(projectDirectory, "*", SearchOption.AllDirectories)
-                .Concat(Directory.GetFiles(projectDirectory))
+                .Concat(new []{ projectDirectory })
                 .Distinct()
                 .OrderBy(dirName => dirName);
             foreach (var dir in allDirectories)
