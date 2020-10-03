@@ -52,6 +52,13 @@ namespace PoExtractor {
                 }
 
                 Console.WriteLine($"{Path.GetFileName(projectPath)}: Found {strings.Values.Count()} strings.");
+
+                foreach (var strValue in strings.Values)
+                {
+                    Console.WriteLine($"{Path.GetFileName(projectPath)}: {strValue.Text}");
+                }
+
+                Console.WriteLine();
             }
         }
 
